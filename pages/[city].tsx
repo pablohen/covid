@@ -97,7 +97,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [
       {
         params: {
-          city: 'test',
+          city: 'Limeira',
         },
       },
     ],
@@ -114,6 +114,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       city,
       results: res.data.results,
     },
+    revalidate: 60 * 60 * 4,
   };
 };
 
