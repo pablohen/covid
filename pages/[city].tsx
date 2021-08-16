@@ -97,7 +97,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [
       {
         params: {
-          city: '',
+          city: 'test',
         },
       },
     ],
