@@ -18,7 +18,7 @@ const getMunicipios = async () => {
     });
     return dadosMunicipio;
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 };
 
