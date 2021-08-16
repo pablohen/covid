@@ -4,6 +4,7 @@ import brasilioService from '../services/brasilioService';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Bar } from 'react-chartjs-2';
 import CountUp from 'react-countup';
+import { NextSeo } from 'next-seo';
 
 interface Props {
   city: string;
@@ -56,10 +57,11 @@ const CityCasesPage = (props: Props) => {
         <p>Carregando...</p>
       ) : (
         <div className="flex flex-col p-4 space-x-0 space-y-4">
+          <NextSeo title={`${results[0].city}/${results[0].state}`} />
           <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border rounded bg-white p-4 shadow-md relative">
             <div className="pb-4 space-y-1">
               <p className="font-bold text-2xl">
-                {results[0].city}/{results[0].state}
+                {`${results[0].city}/${results[0].state}`}
               </p>
               <p className="text-xs text-gray-500 font-bold">
                 {results[0].estimated_population} habitantes (estimativa)
