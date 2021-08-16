@@ -24,14 +24,14 @@ const CityCasesPage = (props: Props) => {
     labels: dataset.reverse(),
     datasets: [
       {
-        label: `${results[0].confirmed} Casos confirmados`,
+        label: `${results?.[0].confirmed} Casos confirmados`,
         data: confirmed.reverse(),
         backgroundColor: ['pink'],
         borderColor: ['pink'],
         borderWidth: 1,
       },
       {
-        label: `${results[0].deaths} Casos confirmados`,
+        label: `${results?.[0].deaths} Casos confirmados`,
         data: deaths.reverse(),
         backgroundColor: ['black'],
         borderColor: ['black'],
@@ -107,15 +107,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { city } = context.params;
-  const res = await brasilioService.getCityCases(String(city));
 
-  return {
-    props: {
-      city,
-      results: res.data.results,
-    },
-    revalidate: 60 * 60 * 4,
-  };
+  if (!!city) {
+    const res = await brasilioService.getCityCases(String(city));
+
+    return {
+      props: {
+        city,
+        results: res.data.results,
+      },
+      revalidate: 60 * 60 * 4,
+    };
+  }
 };
 
 export default CityCasesPage;
