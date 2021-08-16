@@ -8,7 +8,7 @@ import CountUp from 'react-countup';
 
 interface Props {
   city: string;
-  results: [];
+  results: [any];
 }
 
 const CityCasesPage = (props: Props) => {
@@ -107,7 +107,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { city } = context.params;
-  const res = await brasilioService.getCityCases(city);
+  const res = await brasilioService.getCityCases(String(city));
 
   return {
     props: {
