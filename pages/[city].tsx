@@ -68,7 +68,7 @@ const CityCasesPage = (props: Props) => {
   };
 
   return (
-    <div className="bg-purple-50 min-h-screen">
+    <div className="flex flex-col justify-center items-center bg-purple-50 min-h-screen">
       {router.isFallback ? (
         <CustomLoader text="Carregando..." />
       ) : (
