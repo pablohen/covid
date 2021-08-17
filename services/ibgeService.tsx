@@ -10,13 +10,16 @@ const getMunicipios = async () => {
     const res = await api.get('/');
     const dadosMunicipio = res.data.map((municipio: any) => {
       const { id, nome } = municipio;
+      const estado = municipio.microrregiao.mesorregiao.UF.sigla;
+
+      const name = `${nome}/${estado}`;
 
       return {
         id,
-        nome,
+        name,
       };
     });
-    return dadosMunicipio.sort((a, b) => a.nome.localeCompare(b.nome));
+    return dadosMunicipio.sort((a, b) => a.name.localeCompare(b.name));
   } catch (error) {
     console.error(error.message);
   }
