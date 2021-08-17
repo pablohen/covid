@@ -117,7 +117,9 @@ const CityCasesPage = (props: Props) => {
             </div>
 
             <p className="absolute text-white text-xs font-bold bg-purple-400 p-1 rounded-tr rounded-bl top-0 right-0">
-              {`Dados até: ${new Date(results[0].date).toLocaleDateString()}`}
+              {`Atualizado em: ${new Date(
+                results[0].date
+              ).toLocaleDateString()}`}
             </p>
           </div>
 
