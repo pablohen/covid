@@ -7,12 +7,19 @@ import CountUp from 'react-countup';
 import { NextSeo } from 'next-seo';
 
 interface Report {
-  date: Date;
-  confirmed: number;
-  deaths: number;
   city: string;
-  state: string;
+  city_ibge_code: number;
+  confirmed: number;
+  confirmed_per_100k_inhabitants: number;
+  date: Date;
+  death_rate: number;
+  deaths: number;
   estimated_population: number;
+  estimated_population_2019: number;
+  is_last: Boolean;
+  order_for_place: number;
+  place_type: string;
+  state: string;
 }
 
 interface Props {
@@ -100,6 +107,12 @@ const CityCasesPage = (props: Props) => {
                   className="font-bold"
                 />{' '}
                 óbitos
+              </p>
+              <p className="text-sm text-purple-500">
+                <span className="font-bold">
+                  {results[0].death_rate * 100}%
+                </span>{' '}
+                de mortalidade
               </p>
             </div>
 
