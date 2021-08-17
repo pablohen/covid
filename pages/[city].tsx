@@ -6,13 +6,21 @@ import { Bar } from 'react-chartjs-2';
 import CountUp from 'react-countup';
 import { NextSeo } from 'next-seo';
 
-interface Props {
+interface Report {
+  date: Date;
+  confirmed: number;
+  deaths: number;
   city: string;
-  results: [any];
+  state: string;
+  estimated_population: number;
+}
+
+interface Props {
+  results: [Report];
 }
 
 const CityCasesPage = (props: Props) => {
-  const { city, results } = props || {};
+  const { results } = props || {};
   const router = useRouter();
 
   const dataset = results?.map((result) => result.date) || [];
@@ -23,14 +31,14 @@ const CityCasesPage = (props: Props) => {
     labels: dataset.reverse(),
     datasets: [
       {
-        label: `${results?.[0].confirmed} Casos confirmados`,
+        label: `${results?.[0].confirmed} casos confirmados`,
         data: confirmed.reverse(),
         backgroundColor: ['pink'],
         borderColor: ['pink'],
         borderWidth: 1,
       },
       {
-        label: `${results?.[0].deaths} Óbitos`,
+        label: `${results?.[0].deaths} óbitos`,
         data: deaths.reverse(),
         backgroundColor: ['black'],
         borderColor: ['black'],
@@ -52,24 +60,32 @@ const CityCasesPage = (props: Props) => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-purple-50 min-h-screen">
       {router.isFallback ? (
         <p>Carregando...</p>
       ) : (
-        <div className="flex flex-col p-4 space-x-0 space-y-4">
+        <div className="flex flex-col p-4 space-x-0 space-y-4 w-full lg:items-center">
           <NextSeo title={`${results[0].city}/${results[0].state}`} />
-          <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border rounded bg-white p-4 shadow-md relative">
+          <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-400 rounded bg-white p-4 pt-8 md:pt-4 shadow-md relative">
             <div className="pb-4 space-y-1">
-              <p className="font-bold text-2xl">
+              <p className="font-bold text-2xl text-purple-500">
                 {`${results[0].city}/${results[0].state}`}
               </p>
-              <p className="text-xs text-gray-500 font-bold">
+              <p className="font-bold text-xs text-purple-500">
                 {results[0].estimated_population} habitantes (estimativa)
               </p>
+              <a
+                className="font-bold text-xs text-purple-500 underline"
+                href={`http://www.${results[0].city.toLowerCase()}.${results[0].state.toLowerCase()}.gov.br`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {`www.${results[0].city.toLowerCase()}.${results[0].state.toLowerCase()}.gov.br`}
+              </a>
             </div>
 
-            <div className="">
-              <p>
+            <div>
+              <p className="text-sm text-purple-500">
                 <CountUp
                   end={results[0].confirmed}
                   duration={1}
@@ -77,7 +93,7 @@ const CityCasesPage = (props: Props) => {
                 />{' '}
                 casos confirmados
               </p>
-              <p>
+              <p className="text-sm text-purple-500">
                 <CountUp
                   end={results[0].deaths}
                   duration={1}
@@ -87,12 +103,12 @@ const CityCasesPage = (props: Props) => {
               </p>
             </div>
 
-            <p className="absolute text-white text-xs font-bold bg-gray-500 p-1 rounded-tr rounded-bl top-0 right-0">
+            <p className="absolute text-white text-xs font-bold bg-purple-400 p-1 rounded-tr rounded-bl top-0 right-0">
               {`Dados até: ${new Date(results[0].date).toLocaleDateString()}`}
             </p>
           </div>
 
-          <div className="w-full">
+          <div className="w-full lg:w-10/12 bg-white rounded border border-purple-400 shadow-md p-4">
             <Bar data={data} options={options} />
           </div>
         </div>
@@ -122,7 +138,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return {
       props: {
-        city,
         results: res.data.results,
       },
       revalidate: 60 * 60 * 4,
