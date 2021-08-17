@@ -84,7 +84,12 @@ const CityCasesPage = (props: Props) => {
               </p>
               <a
                 className="font-bold text-xs text-purple-500 underline"
-                href={`http://www.${results[0].city.toLowerCase()}.${results[0].state.toLowerCase()}.gov.br`}
+                href={`http://www.${results[0].city
+                  .toLowerCase()
+                  .replaceAll(
+                    /\s/g,
+                    ''
+                  )}.${results[0].state.toLowerCase()}.gov.br`}
                 target="_blank"
                 rel="noreferrer"
               >
