@@ -130,7 +130,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [
       {
         params: {
-          city: 'Limeira',
+          city: '3526902',
         },
       },
     ],

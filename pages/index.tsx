@@ -6,8 +6,8 @@ import router from 'next/router';
 import CustomLoader from '../components/CustomLoader';
 
 interface Municipio {
-  id: number;
-  nome: string;
+  id: string;
+  name: string;
 }
 
 interface Props {
@@ -31,9 +31,9 @@ const Home = (props: Props) => {
 
       <div className="w-full">
         <Autocomplete
-          getItemValue={(municipio: Municipio) => municipio.nome}
+          getItemValue={(municipio: Municipio) => municipio.name}
           items={municipios.filter((municipio) =>
-            municipio.nome
+            municipio.name
               .toLowerCase()
               .includes(municipioSelecionado.toLowerCase())
           )}
@@ -44,14 +44,14 @@ const Home = (props: Props) => {
                 isHighlighted ? 'bg-purple-200' : 'bg-transparent'
               }`}
             >
-              {municipio.nome}
+              {municipio.name}
             </div>
           )}
           value={municipioSelecionado}
           onChange={(e: any) => setMunicipioSelecionado(e.target.value)}
-          onSelect={(val: string) => {
+          onSelect={(val: string, item: Municipio) => {
             setMunicipioSelecionado(val);
-            router.push(val);
+            router.push(`/${item.id}`);
             toggleLoading();
           }}
           wrapperProps={{
