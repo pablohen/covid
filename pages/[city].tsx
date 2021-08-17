@@ -24,29 +24,29 @@ interface Report {
 }
 
 interface Props {
-  results: [Report];
+  reports: [Report];
 }
 
 const CityCasesPage = (props: Props) => {
-  const { results } = props || {};
+  const { reports } = props || {};
   const router = useRouter();
 
-  const dataset = results?.map((result) => result.date) || [];
-  const confirmed = results?.map((result) => result.confirmed) || [];
-  const deaths = results?.map((result) => result.deaths) || [];
+  const dataset = reports?.map((result) => result.date) || [];
+  const confirmed = reports?.map((result) => result.confirmed) || [];
+  const deaths = reports?.map((result) => result.deaths) || [];
 
   const data = {
     labels: dataset.reverse(),
     datasets: [
       {
-        label: `${results?.[0].confirmed} casos confirmados`,
+        label: `${reports?.[0].confirmed} casos confirmados`,
         data: confirmed.reverse(),
         backgroundColor: ['pink'],
         borderColor: ['pink'],
         borderWidth: 1,
       },
       {
-        label: `${results?.[0].deaths} óbitos`,
+        label: `${reports?.[0].deaths} óbitos`,
         data: deaths.reverse(),
         backgroundColor: ['black'],
         borderColor: ['black'],
@@ -73,21 +73,21 @@ const CityCasesPage = (props: Props) => {
         <CustomLoader text="Carregando..." />
       ) : (
         <div className="flex flex-col p-4 space-x-0 space-y-4 w-full lg:items-center">
-          <NextSeo title={`${results[0].city}/${results[0].state}`} />
+          <NextSeo title={`${reports[0].city}/${reports[0].state}`} />
           <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-400 rounded bg-white p-4 pt-8 md:pt-8 shadow-md relative">
             <div className="pb-4 space-y-1">
               <p className="font-bold text-2xl text-purple-500">
-                {`${results[0].city}/${results[0].state}`}
+                {`${reports[0].city}/${reports[0].state}`}
               </p>
               <p className="font-bold text-xs text-purple-500">
-                {results[0].estimated_population} habitantes (estimativa)
+                {reports[0].estimated_population} habitantes (estimativa)
               </p>
             </div>
 
             <div>
               <p className="text-sm text-purple-500">
                 <CountUp
-                  end={results[0].confirmed}
+                  end={reports[0].confirmed}
                   duration={1}
                   className="font-bold"
                 />{' '}
@@ -95,7 +95,7 @@ const CityCasesPage = (props: Props) => {
               </p>
               <p className="text-sm text-purple-500">
                 <CountUp
-                  end={results[0].deaths}
+                  end={reports[0].deaths}
                   duration={1}
                   className="font-bold"
                 />{' '}
@@ -103,7 +103,7 @@ const CityCasesPage = (props: Props) => {
               </p>
               <p className="text-sm text-purple-500">
                 <span className="font-bold">
-                  {Number(results[0].death_rate * 100).toPrecision(2)}%
+                  {Number(reports[0].death_rate * 100).toPrecision(2)}%
                 </span>{' '}
                 de letalidade
               </p>
@@ -111,7 +111,7 @@ const CityCasesPage = (props: Props) => {
 
             <p className="absolute text-white text-xs font-bold bg-purple-400 p-1 rounded-tr rounded-bl top-0 right-0">
               {`Atualizado em: ${new Date(
-                results[0].date
+                reports[0].date
               ).toLocaleDateString()}`}
             </p>
           </div>
@@ -143,10 +143,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (!!city) {
     const res = await brasilioService.getCityCases(String(city));
+    const reports = res.data.results;
 
     return {
       props: {
-        results: res.data.results,
+        reports,
       },
       revalidate: 60 * 60 * 4,
     };

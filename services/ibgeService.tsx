@@ -5,10 +5,10 @@ const api = axios.create({
     'https://servicodados.ibge.gov.br/api/v1/localidades/municipios?orderBy=nome',
 });
 
-const getMunicipios = async () => {
+const getCities = async () => {
   try {
     const res = await api.get('/');
-    const dadosMunicipio = res.data.map((municipio: any) => {
+    const cityData = res.data.map((municipio: any) => {
       const { id, nome } = municipio;
       const estado = municipio.microrregiao.mesorregiao.UF.sigla;
 
@@ -19,14 +19,14 @@ const getMunicipios = async () => {
         name,
       };
     });
-    return dadosMunicipio.sort((a, b) => a.name.localeCompare(b.name));
+    return cityData.sort((a, b) => a.name.localeCompare(b.name));
   } catch (error) {
     console.error(error.message);
   }
 };
 
 const ibgeService = {
-  getMunicipios,
+  getCities,
 };
 
 export default ibgeService;

@@ -5,18 +5,18 @@ import Autocomplete from 'react-autocomplete';
 import router from 'next/router';
 import CustomLoader from '../components/CustomLoader';
 
-interface Municipio {
+interface City {
   id: string;
   name: string;
 }
 
 interface Props {
-  municipios: [Municipio];
+  cities: [City];
 }
 
 const Home = (props: Props) => {
-  const { municipios } = props || {};
-  const [municipioSelecionado, setMunicipioSelecionado] = useState('');
+  const { cities } = props || {};
+  const [chosenCity, setChosenCity] = useState('');
   const [loading, setLoading] = useState(false);
 
   const toggleLoading = () => {
@@ -31,26 +31,24 @@ const Home = (props: Props) => {
 
       <div className="w-full">
         <Autocomplete
-          getItemValue={(municipio: Municipio) => municipio.name}
-          items={municipios.filter((municipio) =>
-            municipio.name
-              .toLowerCase()
-              .includes(municipioSelecionado.toLowerCase())
+          getItemValue={(city: City) => city.name}
+          items={cities.filter((city) =>
+            city.name.toLowerCase().includes(chosenCity.toLowerCase())
           )}
-          renderItem={(municipio: Municipio, isHighlighted: Boolean) => (
+          renderItem={(city: City, isHighlighted: Boolean) => (
             <div
-              key={municipio.id}
+              key={city.id}
               className={`px-2 ${
                 isHighlighted ? 'bg-purple-200' : 'bg-transparent'
               }`}
             >
-              {municipio.name}
+              {city.name}
             </div>
           )}
-          value={municipioSelecionado}
-          onChange={(e: any) => setMunicipioSelecionado(e.target.value)}
-          onSelect={(val: string, item: Municipio) => {
-            setMunicipioSelecionado(val);
+          value={chosenCity}
+          onChange={(e: any) => setChosenCity(e.target.value)}
+          onSelect={(val: string, item: City) => {
+            setChosenCity(val);
             router.push(`/${item.id}`);
             toggleLoading();
           }}
@@ -72,13 +70,13 @@ const Home = (props: Props) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const municipios = await ibgeService.getMunicipios();
+  const cities = await ibgeService.getCities();
 
   return {
     props: {
-      municipios,
-      revalidate: 60 * 60 * 24,
+      cities,
     },
+    revalidate: 60 * 60 * 24,
   };
 };
 
