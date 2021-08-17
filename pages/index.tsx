@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ibgeService from './../services/ibgeService';
 import Autocomplete from 'react-autocomplete';
 import router from 'next/router';
+import CustomLoader from '../components/CustomLoader';
 
 interface Municipio {
   id: number;
@@ -16,10 +17,15 @@ interface Props {
 const Home = (props: Props) => {
   const { municipios } = props || {};
   const [municipioSelecionado, setMunicipioSelecionado] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const toggleLoading = () => {
+    setLoading(!loading);
+  };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50 space-y-4">
-      <h1 className="text-2xl font-bold text-gray-800">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-purple-50 space-y-4">
+      <h1 className="text-2xl font-bold text-purple-800">
         Estatísticas Covid-19
       </h1>
 
@@ -35,7 +41,7 @@ const Home = (props: Props) => {
             <div
               key={municipio.id}
               className={`px-2 ${
-                isHighlighted ? 'bg-gray-200' : 'bg-transparent'
+                isHighlighted ? 'bg-purple-200' : 'bg-transparent'
               }`}
             >
               {municipio.nome}
@@ -46,6 +52,7 @@ const Home = (props: Props) => {
           onSelect={(val: string) => {
             setMunicipioSelecionado(val);
             router.push(val);
+            toggleLoading();
           }}
           wrapperProps={{
             style: { display: 'flex' },
@@ -58,6 +65,8 @@ const Home = (props: Props) => {
           }}
         />
       </div>
+
+      {loading && <CustomLoader text="Aguarde..." />}
     </div>
   );
 };
