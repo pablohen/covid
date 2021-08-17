@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Bar } from 'react-chartjs-2';
 import CountUp from 'react-countup';
 import { NextSeo } from 'next-seo';
+import CustomLoader from '../components/CustomLoader';
 
 interface Report {
   city: string;
@@ -69,7 +70,7 @@ const CityCasesPage = (props: Props) => {
   return (
     <div className="bg-purple-50 min-h-screen">
       {router.isFallback ? (
-        <p>Carregando...</p>
+        <CustomLoader text="Carregando..." />
       ) : (
         <div className="flex flex-col p-4 space-x-0 space-y-4 w-full lg:items-center">
           <NextSeo title={`${results[0].city}/${results[0].state}`} />
