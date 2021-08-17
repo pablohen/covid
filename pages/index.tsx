@@ -54,7 +54,7 @@ const Home = (props: Props) => {
           inputProps={{
             placeholder: 'Escolha uma cidade do Brasil...',
             className:
-              'flex border rounded shadow-sm px-4 py-2 w-10/12 lg:w-8/12 focus:shadow-lg',
+              'flex border rounded shadow-sm px-4 py-2 w-10/12 lg:w-4/12 focus:shadow-lg',
           }}
         />
       </div>
