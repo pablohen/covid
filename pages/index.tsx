@@ -23,7 +23,7 @@ const Home = (props: Props) => {
         Estatísticas Covid-19
       </h1>
 
-      <div className="">
+      <div className="w-full">
         <Autocomplete
           getItemValue={(municipio: Municipio) => municipio.nome}
           items={municipios.filter((municipio) =>
@@ -34,7 +34,9 @@ const Home = (props: Props) => {
           renderItem={(municipio: Municipio, isHighlighted: Boolean) => (
             <div
               key={municipio.id}
-              className={`${isHighlighted ? 'bg-gray-200' : 'bg-transparent'}`}
+              className={`px-2 ${
+                isHighlighted ? 'bg-gray-200' : 'bg-transparent'
+              }`}
             >
               {municipio.nome}
             </div>
@@ -45,10 +47,14 @@ const Home = (props: Props) => {
             setMunicipioSelecionado(val);
             router.push(val);
           }}
+          wrapperProps={{
+            style: { display: 'flex' },
+            className: 'flex justify-center',
+          }}
           inputProps={{
-            placeholder: 'Escolha uma cidade...',
+            placeholder: 'Escolha uma cidade do Brasil...',
             className:
-              'border rounded shadow-sm px-4 py-2 max-w-96 focus:shadow-lg',
+              'flex border rounded shadow-sm px-4 py-2 w-10/12 lg:w-8/12 focus:shadow-lg',
           }}
         />
       </div>
