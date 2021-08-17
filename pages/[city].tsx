@@ -74,7 +74,7 @@ const CityCasesPage = (props: Props) => {
       ) : (
         <div className="flex flex-col p-4 space-x-0 space-y-4 w-full lg:items-center">
           <NextSeo title={`${results[0].city}/${results[0].state}`} />
-          <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-400 rounded bg-white p-4 pt-8 md:pt-4 shadow-md relative">
+          <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-400 rounded bg-white p-4 pt-8 md:pt-8 shadow-md relative">
             <div className="pb-4 space-y-1">
               <p className="font-bold text-2xl text-purple-500">
                 {`${results[0].city}/${results[0].state}`}
@@ -82,19 +82,6 @@ const CityCasesPage = (props: Props) => {
               <p className="font-bold text-xs text-purple-500">
                 {results[0].estimated_population} habitantes (estimativa)
               </p>
-              <a
-                className="font-bold text-xs text-purple-500 underline"
-                href={`http://www.${results[0].city
-                  .toLowerCase()
-                  .replaceAll(
-                    /\s/g,
-                    ''
-                  )}.${results[0].state.toLowerCase()}.gov.br`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {`www.${results[0].city.toLowerCase()}.${results[0].state.toLowerCase()}.gov.br`}
-              </a>
             </div>
 
             <div>
