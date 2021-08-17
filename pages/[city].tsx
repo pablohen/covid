@@ -110,9 +110,9 @@ const CityCasesPage = (props: Props) => {
               </p>
               <p className="text-sm text-purple-500">
                 <span className="font-bold">
-                  {results[0].death_rate * 100}%
+                  {Number(results[0].death_rate * 100).toPrecision(2)}%
                 </span>{' '}
-                de mortalidade
+                de letalidade
               </p>
             </div>
 
