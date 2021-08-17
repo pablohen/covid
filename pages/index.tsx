@@ -59,7 +59,16 @@ const Home = (props: Props) => {
           inputProps={{
             placeholder: 'Escolha uma cidade do Brasil...',
             className:
-              'flex border rounded shadow-sm px-4 py-2 w-10/12 lg:w-4/12 focus:shadow-lg',
+              'flex border rounded shadow-sm px-4 py-2 w-10/12 lg:w-4/12 focus:shadow-lg focus:outline-none focus:ring-0 focus:border-purple-500',
+          }}
+          menuStyle={{
+            borderRadius: '3px',
+            boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+            background: 'rgba(255, 255, 255, 0.9)',
+            padding: '2px 0',
+            position: 'fixed',
+            overflow: 'auto',
+            maxHeight: '10em',
           }}
         />
       </div>
