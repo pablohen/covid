@@ -16,7 +16,7 @@ const getMunicipios = async () => {
         nome,
       };
     });
-    return dadosMunicipio;
+    return dadosMunicipio.sort((a, b) => a.nome.localeCompare(b.nome));
   } catch (error) {
     console.error(error.message);
   }
