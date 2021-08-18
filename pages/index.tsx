@@ -4,6 +4,7 @@ import ibgeService from './../services/ibgeService';
 import Autocomplete from 'react-autocomplete';
 import router from 'next/router';
 import CustomLoader from '../components/CustomLoader';
+import { slugify } from 'transliteration';
 
 interface City {
   id: string;
@@ -23,6 +24,12 @@ const Home = (props: Props) => {
     setLoading(!loading);
   };
 
+  const filterList = () => {
+    return cities.filter((city) =>
+      slugify(city.name).includes(slugify(chosenCity))
+    );
+  };
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-purple-50 space-y-4">
       <h1 className="text-2xl font-bold text-purple-800">
@@ -32,9 +39,7 @@ const Home = (props: Props) => {
       <div className="w-full">
         <Autocomplete
           getItemValue={(city: City) => city.name}
-          items={cities.filter((city) =>
-            city.name.toLowerCase().includes(chosenCity.toLowerCase())
-          )}
+          items={filterList()}
           renderItem={(city: City, isHighlighted: Boolean) => (
             <div
               key={city.id}
