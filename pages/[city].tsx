@@ -87,7 +87,7 @@ const CityCasesPage = (props: Props) => {
               date={reports[0].date}
             />
 
-            <div className="w-full lg:w-10/12 bg-white rounded border border-purple-400 shadow-md p-4">
+            <div className="w-full lg:w-8/12 bg-white rounded border border-purple-400 shadow-md p-4">
               <Bar data={data} options={options} />
             </div>
           </div>
