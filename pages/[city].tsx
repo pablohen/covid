@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import brasilioService from '../services/brasilioService';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Bar } from 'react-chartjs-2';
-import CountUp from 'react-countup';
 import { NextSeo } from 'next-seo';
 import CustomLoader from '../components/CustomLoader';
 import Footer from '../components/Footer';
+import CityStatsCard from '../components/CityStatsCard';
 
 interface Report {
   city: string;
@@ -76,47 +76,16 @@ const CityCasesPage = (props: Props) => {
         ) : (
           <div className="flex flex-col p-4 space-x-0 space-y-4 w-full lg:items-center">
             <NextSeo title={`${reports[0].city}/${reports[0].state}`} />
-            <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-400 rounded bg-white p-4 pt-8 md:pt-8 shadow-md relative">
-              <div className="pb-4 space-y-1">
-                <p className="font-bold text-2xl text-purple-500">
-                  {`${reports[0].city}/${reports[0].state}`}
-                </p>
-                <p className="font-bold text-xs text-purple-500">
-                  {reports[0].estimated_population} habitantes (estimativa)
-                </p>
-              </div>
 
-              <div>
-                <p className="text-sm text-purple-500">
-                  <CountUp
-                    end={reports[0].confirmed}
-                    duration={1}
-                    className="font-bold"
-                  />{' '}
-                  casos confirmados
-                </p>
-                <p className="text-sm text-purple-500">
-                  <CountUp
-                    end={reports[0].deaths}
-                    duration={1}
-                    className="font-bold"
-                  />{' '}
-                  óbitos
-                </p>
-                <p className="text-sm text-purple-500">
-                  <span className="font-bold">
-                    {Number(reports[0].death_rate * 100).toPrecision(2)}%
-                  </span>{' '}
-                  de letalidade
-                </p>
-              </div>
-
-              <p className="absolute text-white text-xs font-bold bg-purple-400 p-1 rounded-tr rounded-bl top-0 right-0">
-                {`Atualizado em: ${new Date(
-                  reports[0].date
-                ).toLocaleDateString()}`}
-              </p>
-            </div>
+            <CityStatsCard
+              city={reports[0].city}
+              state={reports[0].state}
+              population={reports[0].estimated_population}
+              confirmed={reports[0].confirmed}
+              deaths={reports[0].deaths}
+              deathRate={reports[0].death_rate}
+              date={reports[0].date}
+            />
 
             <div className="w-full lg:w-10/12 bg-white rounded border border-purple-400 shadow-md p-4">
               <Bar data={data} options={options} />
