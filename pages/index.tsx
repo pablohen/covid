@@ -6,6 +6,8 @@ import router from 'next/router';
 import CustomLoader from '../components/CustomLoader';
 import Footer from '../components/Footer';
 import slugify from 'slugify';
+import statsImage from '../public/stats-graphs.png';
+import Image from 'next/image';
 
 interface City {
   id: string;
@@ -36,6 +38,15 @@ const Home = (props: Props) => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-col flex-grow justify-center items-center  bg-purple-50 space-y-4">
+        <div className="w-6/12 md:w-3/12 lg:w-2/12">
+          <Image
+            src={statsImage}
+            alt="stats and graphs"
+            placeholder="blur"
+            layout="responsive"
+          />
+        </div>
+
         <h1 className="text-2xl font-bold text-purple-800">
           Estatísticas Covid-19
         </h1>
