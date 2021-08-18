@@ -4,8 +4,8 @@ import ibgeService from './../services/ibgeService';
 import Autocomplete from 'react-autocomplete';
 import router from 'next/router';
 import CustomLoader from '../components/CustomLoader';
-import { slugify } from 'transliteration';
 import Footer from '../components/Footer';
+import slugify from 'slugify';
 
 interface City {
   id: string;
@@ -27,7 +27,9 @@ const Home = (props: Props) => {
 
   const filterList = () => {
     return cities.filter((city) =>
-      slugify(city.name).includes(slugify(chosenCity))
+      slugify(city.name, { lower: true }).includes(
+        slugify(chosenCity, { lower: true })
+      )
     );
   };
 
