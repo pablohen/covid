@@ -1,5 +1,5 @@
 const site = `https://${process.env.VERCEL_URL}`;
-const siteName = 'Estatísticas Covid-19';
+const siteName = 'Estatísticas Covid-19 Brasil';
 const description =
   'Veja as estatísticas da Covid-19 de cada município do Brasil';
 const keywords =
