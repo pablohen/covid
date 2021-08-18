@@ -12,7 +12,7 @@ Veja as estatísticas da Covid-19 de cada município do Brasil [https://covid.pa
 - React ChartJS 2
 - React CountUp
 - React Loader Spinner
-- Transliterate
+- Slugify
 
 ## Backend:
 - Base de municípios: [IBGE](https://servicodados.ibge.gov.br/api/docs)
