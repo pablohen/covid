@@ -1,5 +1,5 @@
 import router from 'next/router';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Autocomplete from 'react-autocomplete';
 import slugify from 'slugify';
 import City from '../interfaces/City';
@@ -37,7 +37,9 @@ const CitySearchBar = (props: Props) => {
           </div>
         )}
         value={selectedItem}
-        onChange={(e: any) => setSelectedItem(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setSelectedItem(e.target.value)
+        }
         onSelect={(val: string, item: City) => {
           router.push(`/${item.id}`);
           toast.loading('Carregando...', {
