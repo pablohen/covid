@@ -6,26 +6,11 @@ import { Bar } from 'react-chartjs-2';
 import { NextSeo } from 'next-seo';
 import CustomLoader from '../components/CustomLoader';
 import Footer from '../components/Footer';
-import CityStatsCard from '../components/CityStatsCard';
-
-interface Report {
-  city: string;
-  city_ibge_code: number;
-  confirmed: number;
-  confirmed_per_100k_inhabitants: number;
-  date: Date;
-  death_rate: number;
-  deaths: number;
-  estimated_population: number;
-  estimated_population_2019: number;
-  is_last: Boolean;
-  order_for_place: number;
-  place_type: string;
-  state: string;
-}
+import CityInfoCard from '../components/CityInfoCard';
+import Report from '../interfaces/Report';
 
 interface Props {
-  reports: [Report];
+  reports: Report[];
 }
 
 const CityCasesPage = (props: Props) => {
@@ -77,7 +62,7 @@ const CityCasesPage = (props: Props) => {
           <div className="flex flex-col p-4 space-x-0 space-y-4 w-full lg:items-center">
             <NextSeo title={`${reports[0].city}/${reports[0].state}`} />
 
-            <CityStatsCard
+            <CityInfoCard
               city={reports[0].city}
               state={reports[0].state}
               population={reports[0].estimated_population}
