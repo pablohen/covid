@@ -11,7 +11,7 @@ interface Props {
   date: Date;
 }
 
-const CityStatsCard = (props: Props) => {
+const CityInfoCard = (props: Props) => {
   const { city, state, population, confirmed, deaths, deathRate, date } =
     props || {};
 
@@ -49,4 +49,4 @@ const CityStatsCard = (props: Props) => {
   );
 };
 
-export default CityStatsCard;
+export default CityInfoCard;
