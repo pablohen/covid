@@ -112,11 +112,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { city } = context.params;
+  const { city } = context.params || {};
 
   if (!!city) {
-    const res = await brasilioService.getCityCases(String(city));
-    const reports = res.data.results;
+    const reports = await brasilioService.getCityCases(String(city));
 
     return {
       props: {
@@ -125,6 +124,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
       revalidate: 60 * 60 * 4,
     };
   }
+
+  return {
+    props: {},
+    revalidate: 60 * 60 * 4,
+  };
 };
 
 export default CityCasesPage;
