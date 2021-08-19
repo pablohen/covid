@@ -2,7 +2,7 @@
 
 Veja as estatísticas da Covid-19 de cada município do Brasil [https://covid.pablohen.vercel.app](https://covid.pablohen.vercel.app).
 
-## Frontend:
+## Front-end:
 
 - TypeScript
 - React
@@ -18,7 +18,7 @@ Veja as estatísticas da Covid-19 de cada município do Brasil [https://covid.pa
 - React Loader Spinner
 - Slugify
 
-## Backend:
+## Back-end:
 
 - Cidades: [IBGE](https://servicodados.ibge.gov.br/api/docs)
 - Estatísticas: [Brasil.IO](https://brasil.io/)
