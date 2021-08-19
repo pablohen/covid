@@ -39,9 +39,12 @@ const CitySearchBar = (props: Props) => {
         value={selectedItem}
         onChange={(e: any) => setSelectedItem(e.target.value)}
         onSelect={(val: string, item: City) => {
-          setSelectedItem(val);
           router.push(`/${item.id}`);
-          toast.loading('Carregando...', { position: 'bottom-center' });
+          toast.loading('Carregando...', {
+            position: 'bottom-center',
+            duration: 2000,
+          });
+          setSelectedItem(val);
         }}
         wrapperProps={{
           style: { display: 'flex' },
