@@ -1,7 +1,6 @@
-import React from 'react';
 import { useRouter } from 'next/router';
 import brasilioService from '../services/brasilioService';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { Bar } from 'react-chartjs-2';
 import { NextSeo } from 'next-seo';
 import CustomLoader from '../components/CustomLoader';
@@ -96,7 +95,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => {
   const { city } = context.params || {};
 
   if (!!city) {
