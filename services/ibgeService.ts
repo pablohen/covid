@@ -1,5 +1,6 @@
 import axios from 'axios';
 import City from '../interfaces/City';
+import IbgeCity from '../interfaces/IbgeCity';
 
 const api = axios.create({
   baseURL:
@@ -9,7 +10,7 @@ const api = axios.create({
 const getCities = async () => {
   try {
     const res = await api.get('/');
-    const cityData: City[] = res.data.map((municipio: any) => {
+    const cityData: City[] = res.data.map((municipio: IbgeCity) => {
       const { id, nome } = municipio;
       const estado = municipio.microrregiao.mesorregiao.UF.sigla;
 
