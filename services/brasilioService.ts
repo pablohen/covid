@@ -10,9 +10,9 @@ const api = axios.create({
 const getCityCases = async (city: string) => {
   try {
     const res = await api.get('/', { params: { city_ibge_code: city } });
-    return res;
+    return res.data.results;
   } catch (error) {
-    console.error(error.message);
+    throw new Error(error.message);
   }
 };
 

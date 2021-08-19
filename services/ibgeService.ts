@@ -1,4 +1,5 @@
 import axios from 'axios';
+import City from '../interfaces/City';
 
 const api = axios.create({
   baseURL:
@@ -8,7 +9,7 @@ const api = axios.create({
 const getCities = async () => {
   try {
     const res = await api.get('/');
-    const cityData = res.data.map((municipio: any) => {
+    const cityData: City[] = res.data.map((municipio: any) => {
       const { id, nome } = municipio;
       const estado = municipio.microrregiao.mesorregiao.UF.sigla;
 
@@ -21,7 +22,7 @@ const getCities = async () => {
     });
     return cityData.sort((a, b) => a.name.localeCompare(b.name));
   } catch (error) {
-    console.error(error.message);
+    throw new Error(error.message);
   }
 };
 
