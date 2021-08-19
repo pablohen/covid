@@ -8,14 +8,10 @@ import Footer from '../components/Footer';
 import slugify from 'slugify';
 import statsImage from '../public/stats-graphs.png';
 import Image from 'next/image';
-
-interface City {
-  id: string;
-  name: string;
-}
+import City from '../interfaces/City';
 
 interface Props {
-  cities: [City];
+  cities: City[];
 }
 
 const Home = (props: Props) => {
