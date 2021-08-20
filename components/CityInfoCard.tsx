@@ -62,7 +62,7 @@ const CityInfoCard = ({
         </p>
       </div>
 
-      <p className="absolute text-white text-xs font-bold bg-purple-500 p-1 rounded-tr rounded-bl top-0 right-0">
+      <p className="absolute text-white text-xs font-bold bg-purple-500 p-1 rounded-bl top-0 right-0">
         {`Atualizado em: ${new Date(date).toLocaleDateString()}`}
       </p>
     </div>
