@@ -9,7 +9,7 @@ interface Props {}
 
 const Footer = (props: Props) => {
   return (
-    <footer className="flex flex-col bg-purple-500 shadow-lg p-2">
+    <footer className="flex flex-col bg-purple-500 p-2">
       <div className="flex flex-wrap justify-center items-center">
         <FooterLink
           Icon={LocationMarkerIcon}

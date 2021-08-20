@@ -25,7 +25,7 @@ const CityInfoCard = ({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-500 rounded bg-white p-4 pt-8 md:pt-8 shadow-md relative">
+    <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-500 rounded-2xl bg-white p-8 pt-8 md:pt-8 shadow-md relative">
       <div className="space-y-2">
         <p className="font-bold text-2xl text-purple-500">
           {`${city}/${state}`}
@@ -62,7 +62,7 @@ const CityInfoCard = ({
         </p>
       </div>
 
-      <p className="absolute text-white text-xs font-bold bg-purple-500 p-1 rounded-bl top-0 right-0">
+      <p className="absolute text-white text-xs bg-purple-500 px-8 py-1 rounded-bl rounded-tr-2xl top-0 right-0">
         {`Atualizado em: ${new Date(date).toLocaleDateString()}`}
       </p>
     </div>

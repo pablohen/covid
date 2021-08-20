@@ -59,7 +59,7 @@ const CityCasesPage = ({ reports }: Props) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex flex-col flex-grow justify-center items-center bg-purple-50">
+      <div className="flex flex-col flex-grow justify-center items-center bg-purple-400">
         {router.isFallback ? (
           <CustomLoader text="Carregando..." />
         ) : (
@@ -76,7 +76,7 @@ const CityCasesPage = ({ reports }: Props) => {
               date={reports[0].date}
             />
 
-            <div className="w-full lg:w-8/12 bg-white rounded border border-purple-400 shadow-md p-4">
+            <div className="w-full lg:w-8/12 bg-white rounded-2xl border border-purple-400 shadow-md p-8">
               <Bar data={data} options={options} />
             </div>
           </div>
