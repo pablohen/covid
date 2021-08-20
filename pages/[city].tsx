@@ -15,7 +15,8 @@ interface Props {
 const CityCasesPage = ({ reports }: Props) => {
   const router = useRouter();
 
-  const dataset = reports?.map((result) => result.date) || [];
+  const dataset =
+    reports?.map((result) => new Date(result.date).toLocaleDateString()) || [];
   const confirmed = reports?.map((result) => result.confirmed) || [];
   const deaths = reports?.map((result) => result.deaths) || [];
 
