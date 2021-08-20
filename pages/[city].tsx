@@ -41,6 +41,11 @@ const CityCasesPage = ({ reports }: Props) => {
   };
 
   const options = {
+    responsive: true,
+    interaction: {
+      intersect: false,
+      mode: 'index',
+    },
     scales: {
       yAxes: [
         {
