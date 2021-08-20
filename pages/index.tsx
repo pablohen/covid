@@ -10,9 +10,7 @@ interface Props {
   cities: City[];
 }
 
-const Home = (props: Props) => {
-  const { cities } = props || {};
-
+const Home = ({ cities }: Props) => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-col flex-grow justify-center items-center  bg-purple-50 space-y-4">

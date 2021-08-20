@@ -9,8 +9,7 @@ interface Props {
   cities: City[];
 }
 
-const CitySearchBar = (props: Props) => {
-  const { cities } = props || {};
+const CitySearchBar = ({ cities }: Props) => {
   const [selectedItem, setSelectedItem] = useState('');
 
   const filterList = () => {
@@ -30,7 +29,7 @@ const CitySearchBar = (props: Props) => {
           <div
             key={item.id}
             className={`px-2 ${
-              isHighlighted ? 'bg-purple-200' : 'bg-transparent'
+              isHighlighted ? 'bg-purple-200 font-bold' : 'bg-transparent'
             }`}
           >
             {item.name}
@@ -55,7 +54,7 @@ const CitySearchBar = (props: Props) => {
         inputProps={{
           placeholder: 'Escolha uma cidade do Brasil...',
           className:
-            'flex border rounded shadow-sm px-4 py-2 w-10/12 lg:w-4/12 focus:shadow-lg focus:outline-none focus:ring-0 focus:border-purple-500',
+            'flex border rounded-full shadow-sm px-4 py-2 w-10/12 lg:w-4/12 transform transition-all duration-150 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 focus:border-purple-500',
         }}
         menuStyle={{
           borderRadius: '3px',

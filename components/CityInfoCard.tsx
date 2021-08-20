@@ -11,10 +11,15 @@ interface Props {
   date: Date;
 }
 
-const CityInfoCard = (props: Props) => {
-  const { city, state, population, confirmed, deaths, deathRate, date } =
-    props || {};
-
+const CityInfoCard = ({
+  city,
+  state,
+  population,
+  confirmed,
+  deaths,
+  deathRate,
+  date,
+}: Props) => {
   return (
     <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-400 rounded bg-white p-4 pt-8 md:pt-8 shadow-md relative">
       <div className="pb-4 space-y-1">

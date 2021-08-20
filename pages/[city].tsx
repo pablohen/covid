@@ -12,8 +12,7 @@ interface Props {
   reports: Report[];
 }
 
-const CityCasesPage = (props: Props) => {
-  const { reports } = props || {};
+const CityCasesPage = ({ reports }: Props) => {
   const router = useRouter();
 
   const dataset = reports?.map((result) => result.date) || [];
