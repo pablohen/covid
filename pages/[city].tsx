@@ -23,14 +23,14 @@ const CityCasesPage = ({ reports }: Props) => {
     labels: dataset.reverse(),
     datasets: [
       {
-        label: `${reports?.[0].confirmed} casos confirmados`,
+        label: `${reports?.[0].confirmed.toLocaleString()} casos confirmados`,
         data: confirmed.reverse(),
         backgroundColor: ['pink'],
         borderColor: ['pink'],
         borderWidth: 1,
       },
       {
-        label: `${reports?.[0].deaths} óbitos`,
+        label: `${reports?.[0].deaths.toLocaleString()} óbitos`,
         data: deaths.reverse(),
         backgroundColor: ['black'],
         borderColor: ['black'],
