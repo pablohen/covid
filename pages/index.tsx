@@ -13,7 +13,7 @@ interface Props {
 const Home = ({ cities }: Props) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex flex-col flex-grow justify-center items-center bg-purple-500 dark:bg-gray-800 space-y-4">
+      <div className="flex flex-col flex-grow justify-center items-center bg-purple-500 dark:bg-gray-900 space-y-4">
         <div className="w-6/12 md:w-3/12 lg:w-2/12">
           <Image
             src={statsImage}
