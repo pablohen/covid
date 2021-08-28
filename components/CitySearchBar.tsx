@@ -59,7 +59,7 @@ const CitySearchBar = ({ cities }: Props) => {
         inputProps={{
           placeholder: 'Escolha uma cidade do Brasil...',
           className:
-            'flex border rounded-full shadow-sm px-4 py-2 w-10/12 lg:w-4/12 transform transition-all duration-150 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 focus:border-purple-500 dark:focus:border-gray-500',
+            'flex border dark:border-gray-500 rounded-full shadow-sm px-4 py-2 w-10/12 lg:w-4/12 transform transition-all duration-150 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 focus:border-purple-500 dark:focus:border-gray-500',
         }}
         menuStyle={{
           borderRadius: '3px',
