@@ -1,6 +1,6 @@
 # Covid
 
-Veja as estatísticas da Covid-19 de cada município do Brasil [https://covid.pablohen.vercel.app](https://covid.pablohen.vercel.app).
+Veja as estatísticas da Covid-19 de cada cidade do Brasil [https://covid.pablohen.vercel.app](https://covid.pablohen.vercel.app).
 
 ## Front-end:
 
@@ -8,6 +8,7 @@ Veja as estatísticas da Covid-19 de cada município do Brasil [https://covid.pa
 - React
 - Next.js
 - Next-SEO
+- Next-Themes
 - Tailwind CSS
 - Heroicons
 - Axios
