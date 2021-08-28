@@ -7,7 +7,7 @@ interface Props {
 const FooterLink = ({ Icon, link, text }: Props) => {
   return (
     <a href={link} target="_blank" rel="noreferrer" className="p-2">
-      <p className="flex items-center p-1 px-2 border border-white rounded-full text-white transform transition-all duration-150 ease-in-out hover:bg-purple-400">
+      <p className="flex items-center p-1 px-2 border border-white dark:border-gray-500 rounded-full text-white transform transition-all duration-150 ease-in-out hover:bg-purple-400 dark:hover:bg-gray-600">
         {Icon && <Icon className="h-6 mr-2" />}
         {text}
       </p>

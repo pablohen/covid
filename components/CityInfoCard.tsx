@@ -25,18 +25,18 @@ const CityInfoCard = ({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-500 rounded-2xl bg-white p-8 pt-8 md:pt-8 shadow-md relative">
+    <div className="flex flex-col justify-center items-center text-center md:flex-row md:justify-between md:text-left w-full lg:w-1/2 h-full border border-purple-500 dark:border-gray-500 rounded-2xl bg-white p-8 pt-8 md:pt-8 shadow-md relative">
       <div className="space-y-2">
-        <p className="font-bold text-2xl text-purple-500">
+        <p className="font-bold text-2xl text-purple-500 dark:text-gray-500">
           {`${city}/${state}`}
         </p>
-        <p className="text-lg text-purple-500">
+        <p className="text-lg text-purple-500 dark:text-gray-500">
           {population.toLocaleString()} habitantes (estimativa)
         </p>
       </div>
 
       <div>
-        <p className="text-sm text-purple-500">
+        <p className="text-sm text-purple-500 dark:text-gray-500">
           <CountUp
             end={confirmed}
             duration={1}
@@ -45,7 +45,7 @@ const CityInfoCard = ({
           />{' '}
           casos confirmados
         </p>
-        <p className="text-sm text-purple-500">
+        <p className="text-sm text-purple-500 dark:text-gray-500">
           <CountUp
             end={deaths}
             duration={1}
@@ -54,7 +54,7 @@ const CityInfoCard = ({
           />{' '}
           óbitos
         </p>
-        <p className="text-sm text-purple-500">
+        <p className="text-sm text-purple-500 dark:text-gray-500">
           <span className="font-bold">
             {Number(deathRate * 100).toPrecision(2)}%
           </span>{' '}
@@ -62,7 +62,7 @@ const CityInfoCard = ({
         </p>
       </div>
 
-      <p className="absolute text-white text-xs bg-purple-500 px-8 py-1 rounded-bl rounded-tr-2xl top-0 right-0">
+      <p className="absolute text-white text-xs bg-purple-500 dark:bg-gray-500 px-8 py-1 rounded-bl rounded-tr-2xl top-0 right-0">
         {`Atualizado em: ${new Date(date).toLocaleDateString()}`}
       </p>
     </div>

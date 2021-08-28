@@ -59,7 +59,7 @@ const CityCasesPage = ({ reports }: Props) => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex flex-col flex-grow justify-center items-center bg-purple-400">
+      <div className="flex flex-col flex-grow justify-center items-center bg-purple-400 dark:bg-gray-800">
         {router.isFallback ? (
           <CustomLoader text="Carregando..." />
         ) : (
@@ -76,7 +76,7 @@ const CityCasesPage = ({ reports }: Props) => {
               date={reports[0].date}
             />
 
-            <div className="w-full lg:w-8/12 bg-white rounded-2xl border border-purple-400 shadow-md p-8">
+            <div className="w-full lg:w-8/12 bg-white rounded-2xl border border-purple-400 dark:border-gray-600 shadow-md p-8">
               <Bar data={data} options={options} />
             </div>
           </div>
@@ -104,10 +104,13 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   const { city } = context.params || {};
+  let reports = [];
 
-  if (!!city) {
-    const reports = await brasilioService.getCityCases(String(city));
-
+  try {
+    reports = await brasilioService.getCityCases(String(city));
+  } catch (error) {
+    console.log(error);
+  } finally {
     return {
       props: {
         reports,
@@ -115,11 +118,6 @@ export const getStaticProps: GetStaticProps = async (
       revalidate: 60 * 60 * 4,
     };
   }
-
-  return {
-    props: {},
-    revalidate: 60 * 60 * 4,
-  };
 };
 
 export default CityCasesPage;
