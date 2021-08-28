@@ -2,16 +2,11 @@ import {
   LocationMarkerIcon,
   ChartPieIcon,
   LockOpenIcon,
-  SunIcon,
 } from '@heroicons/react/solid';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 import FooterLink from './FooterLink';
 import ToggleThemeButton from './ToggleThemeButton';
 
-interface Props {}
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <footer className="flex flex-col bg-purple-500 dark:bg-gray-900 p-2">
       <div className="flex flex-wrap justify-center items-center">
