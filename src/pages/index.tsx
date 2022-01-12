@@ -1,7 +1,7 @@
 import type { GetStaticProps } from 'next';
 import ibgeService from './../services/ibgeService';
 import Footer from '../components/Footer';
-import statsImage from '../public/stats-graphs.png';
+import statsImage from '../../public/stats-graphs.png';
 import Image from 'next/image';
 import City from '../interfaces/City';
 import CitySearchBar from '../components/CitySearchBar';
