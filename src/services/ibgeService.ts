@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import City from '../interfaces/City';
 import IbgeCity from '../interfaces/IbgeCity';
 
@@ -9,7 +9,7 @@ const api = axios.create({
 
 const getCities = async () => {
   try {
-    const res = await api.get('/');
+    const res = await api.get<IbgeCity[]>('/');
     const cityData: City[] = res.data.map((municipio: IbgeCity) => {
       const { id, nome } = municipio;
       const estado = municipio.microrregiao.mesorregiao.UF.sigla;
@@ -21,9 +21,15 @@ const getCities = async () => {
         name,
       };
     });
-    return cityData.sort((a, b) => a.name.localeCompare(b.name));
+
+    const sortedCityData = cityData.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+
+    return sortedCityData;
   } catch (error) {
-    throw new Error(error.message);
+    const axiosError = error as AxiosError;
+    throw new Error(axiosError.message);
   }
 };
 
