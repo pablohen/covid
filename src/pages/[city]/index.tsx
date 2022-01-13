@@ -8,7 +8,7 @@ import CityInfoCard from '../../components/CityInfoCard';
 import Report from '../../interfaces/Report';
 import CityInfoChart from '../../components/CityInfoChart';
 import { AxiosError } from 'axios';
-import { ChartData } from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
 
 interface Props {
   reports: Report[];
@@ -23,7 +23,7 @@ const CityCasesPage = ({ reports }: Props) => {
   const confirmed = reports?.map((result) => result.confirmed) || [];
   const deaths = reports?.map((result) => result.deaths) || [];
 
-  const data: ChartData<'bar'> = {
+  const data: ChartData = {
     labels: dataset.reverse(),
     datasets: [
       {
@@ -43,20 +43,11 @@ const CityCasesPage = ({ reports }: Props) => {
     ],
   };
 
-  const options = {
+  const options: ChartOptions = {
     responsive: true,
     interaction: {
       intersect: false,
       mode: 'index',
-    },
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
     },
   };
 
