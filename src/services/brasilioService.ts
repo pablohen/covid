@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import Report from '../interfaces/Report';
 
 const api = axios.create({
   baseURL: 'https://api.brasil.io/v1/dataset/covid19/caso/data/',
@@ -10,9 +11,10 @@ const api = axios.create({
 const getCityCases = async (city: string) => {
   try {
     const res = await api.get('/', { params: { city_ibge_code: city } });
-    return res.data.results;
+    return res.data.results as Report[];
   } catch (error) {
-    throw new Error(error.message);
+    const axiosError = error as AxiosError;
+    throw new Error(axiosError.message);
   }
 };
 

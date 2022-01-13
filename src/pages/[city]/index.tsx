@@ -1,15 +1,18 @@
 import { useRouter } from 'next/router';
-import brasilioService from '../services/brasilioService';
+import brasilioService from '../../services/brasilioService';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
-import { Bar } from 'react-chartjs-2';
 import { NextSeo } from 'next-seo';
-import CustomLoader from '../components/CustomLoader';
-import Footer from '../components/Footer';
-import CityInfoCard from '../components/CityInfoCard';
-import Report from '../interfaces/Report';
+import CustomLoader from '../../components/CustomLoader';
+import Footer from '../../components/Footer';
+import CityInfoCard from '../../components/CityInfoCard';
+import Report from '../../interfaces/Report';
+import CityInfoChart from '../../components/CityInfoChart';
+import { AxiosError } from 'axios';
+import { ChartData, ChartOptions } from 'chart.js';
 
 interface Props {
   reports: Report[];
+  error: string;
 }
 
 const CityCasesPage = ({ reports }: Props) => {
@@ -20,7 +23,7 @@ const CityCasesPage = ({ reports }: Props) => {
   const confirmed = reports?.map((result) => result.confirmed) || [];
   const deaths = reports?.map((result) => result.deaths) || [];
 
-  const data = {
+  const data: ChartData = {
     labels: dataset.reverse(),
     datasets: [
       {
@@ -40,20 +43,11 @@ const CityCasesPage = ({ reports }: Props) => {
     ],
   };
 
-  const options = {
+  const options: ChartOptions = {
     responsive: true,
     interaction: {
       intersect: false,
       mode: 'index',
-    },
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
     },
   };
 
@@ -76,9 +70,7 @@ const CityCasesPage = ({ reports }: Props) => {
               date={reports[0].date}
             />
 
-            <div className="w-full lg:w-8/12 bg-white rounded-2xl border border-purple-400 dark:border-gray-600 shadow-md p-8">
-              <Bar data={data} options={options} />
-            </div>
+            <CityInfoChart data={data} options={options} />
           </div>
         )}
       </div>
@@ -103,19 +95,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
-  const { city } = context.params || {};
-  let reports = [];
+  const { city } = context.params as { city: string };
 
   try {
-    reports = await brasilioService.getCityCases(String(city));
-  } catch (error) {
-    console.log(error);
-  } finally {
+    const reports = await brasilioService.getCityCases(city);
+
     return {
       props: {
         reports,
+        error: false,
       },
       revalidate: 60 * 60 * 4,
+    };
+  } catch (error) {
+    const axiosError = error as AxiosError;
+
+    return {
+      props: {
+        reports: [],
+        error: axiosError.message,
+      },
     };
   }
 };
