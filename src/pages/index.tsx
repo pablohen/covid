@@ -5,12 +5,20 @@ import statsImage from '../../public/stats-graphs.png';
 import Image from 'next/image';
 import City from '../interfaces/City';
 import CitySearchBar from '../components/CitySearchBar';
+import { AxiosError } from 'axios';
 
 interface Props {
   cities: City[];
+  error: string;
 }
 
-const Home = ({ cities }: Props) => {
+const Home = ({ cities, error }: Props) => {
+  if (error) {
+    return (
+      <p>Ocorreu um erro ao carregar a lista de cidades. Tente novamente.</p>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-col flex-grow justify-center items-center bg-purple-500 dark:bg-gray-900 space-y-4">
@@ -33,18 +41,25 @@ const Home = ({ cities }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  let cities: City[] = [];
-
   try {
-    cities = await ibgeService.getCities();
-  } catch (error) {
-    console.log(error);
-  } finally {
+    const cities = await ibgeService.getCities();
+
     return {
       props: {
         cities,
+        error: '',
       },
       revalidate: 60 * 60 * 24,
+    };
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    console.error(axiosError.message);
+
+    return {
+      props: {
+        cities: [],
+        error: axiosError.message,
+      },
     };
   }
 };
