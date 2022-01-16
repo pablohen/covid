@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import brasilioService from '../../services/brasilioService';
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetStaticPaths, GetStaticPropsContext } from 'next';
 import { NextSeo } from 'next-seo';
 import CustomLoader from '../../components/CustomLoader';
 import Footer from '../../components/Footer';
@@ -79,31 +79,18 @@ const CityCasesPage = ({ reports }: Props) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          city: '3526902',
-        },
-      },
-    ],
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (
-  context: GetStaticPropsContext
+export const getStaticProps = async (
+  context: GetStaticPropsContext<{ city: string }>
 ) => {
-  const { city } = context.params as { city: string };
+  const city = context.params?.city;
 
   try {
-    const reports = await brasilioService.getCityCases(city);
+    const reports = await brasilioService.getCityCases(city!);
 
     return {
       props: {
         reports,
-        error: false,
+        error: '',
       },
       revalidate: 60 * 60 * 4,
     };
@@ -117,6 +104,19 @@ export const getStaticProps: GetStaticProps = async (
       },
     };
   }
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      {
+        params: {
+          city: '3526902',
+        },
+      },
+    ],
+    fallback: true,
+  };
 };
 
 export default CityCasesPage;
